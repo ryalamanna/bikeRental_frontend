@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks"
 import axiosURL from "../axiosConfig"
 import { vehicleModel, vehicleNameModel } from "../Models/VehicleModel";
 import {Link} from 'preact-router';
+import Loader from "./Loader";
 const VehicleMaster = () => {
   const[loading, setLoading] = useState<boolean>(true);
   const[option, setOption] = useState<string>('');
@@ -31,7 +32,6 @@ const VehicleMaster = () => {
   useEffect(() => {
     loadData();
   }, [])
-
 
   // || handle change ||
   const handleChange = (e:Event)=>{
@@ -166,9 +166,6 @@ const VehicleMaster = () => {
       handleEdit(e);
     }
   }
- 
-
-
   
   
   return (
@@ -211,7 +208,6 @@ const VehicleMaster = () => {
                       : <div style={`background: red; width: 100%; height: 20px`}></div>
                     : 'N/A'}
                 </td>
-
                 <td>
                   <button class='edit_btn' onClick={()=>OpenEdit(vehicle.vehicle_id)}>
                     <i class="fa fa-pencil"></i>
@@ -230,10 +226,7 @@ const VehicleMaster = () => {
       </tbody>
     </table></>}
 
-    {loading &&
-    <div className="loader">
-      <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-    </div>}
+    {loading && <Loader/>}
 
 {option !== '' &&
     <div>
